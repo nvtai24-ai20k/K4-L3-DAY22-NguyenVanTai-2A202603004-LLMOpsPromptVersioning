@@ -40,6 +40,8 @@ def get_llm(provider: str = None, temperature: float = 0.0):
             "model": config.OPENAI_MODEL,
             "api_key": config.OPENAI_API_KEY,
             "temperature": temperature,
+            "timeout": 60,        # mạng chập chờn: request treo quá 60s thì thử lại
+            "max_retries": 3,
         }
         if config.OPENAI_BASE_URL:
             kwargs["base_url"] = config.OPENAI_BASE_URL
@@ -110,6 +112,8 @@ def get_embeddings(provider: str = None):
         kwargs = {
             "model": config.OPENAI_EMBEDDING_MODEL,
             "api_key": config.OPENAI_API_KEY,
+            "timeout": 60,
+            "max_retries": 3,
         }
         if config.OPENAI_BASE_URL:
             kwargs["base_url"] = config.OPENAI_BASE_URL
